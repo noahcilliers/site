@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>white queen</title>
+<defs>
+  <filter id="edge" x="-10%" y="-10%" width="120%" height="120%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="grown"/>
+    <feFlood flood-color="#1c1a17"/>
+    <feComposite in2="grown" operator="in" result="outline"/>
+    <feMerge><feMergeNode in="outline"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<circle cx="128" cy="128" r="122" fill="#1c1a17"/>
+<circle cx="128" cy="128" r="115" fill="#f7f2e6"/>
+<circle cx="128" cy="128" r="103" fill="none" stroke="#1c1a17" stroke-width="3" opacity="0.5"/>
+<path d="M60.50,49.64 L83.60,49.64 L83.60,82.39 L60.50,82.39Z M128.00,49.64 L151.10,49.64 L151.10,82.39 L128.00,82.39Z M195.50,49.64 L218.60,49.64 L218.60,82.39 L195.50,82.39Z M60.50,81.79 L83.60,81.79 L83.60,114.53 L60.50,114.53Z M83.00,81.79 L106.10,81.79 L106.10,114.53 L83.00,114.53Z M105.50,81.79 L128.60,81.79 L128.60,114.53 L105.50,114.53Z M128.00,81.79 L151.10,81.79 L151.10,114.53 L128.00,114.53Z M150.50,81.79 L173.60,81.79 L173.60,114.53 L150.50,114.53Z M173.00,81.79 L196.10,81.79 L196.10,114.53 L173.00,114.53Z M195.50,81.79 L218.60,81.79 L218.60,114.53 L195.50,114.53Z M83.00,113.93 L106.10,113.93 L106.10,146.67Z M105.50,113.93 L128.60,113.93 L128.60,146.67 L105.50,146.67Z M128.00,113.93 L151.10,113.93 L151.10,146.67 L128.00,146.67Z M150.50,113.93 L173.60,113.93 L173.60,146.67 L150.50,146.67Z M173.00,113.93 L196.10,113.93 L173.00,146.67Z M105.50,146.07 L128.60,146.07 L128.60,178.81 L105.50,178.81Z M128.00,146.07 L151.10,146.07 L151.10,178.81 L128.00,178.81Z M150.50,146.07 L173.60,146.07 L173.60,178.81 L150.50,178.81Z M106.10,178.21 L106.10,210.96 L83.00,210.96Z M105.50,178.21 L128.60,178.21 L128.60,210.96 L105.50,210.96Z M128.00,178.21 L151.10,178.21 L151.10,210.96 L128.00,210.96Z M150.50,178.21 L173.60,178.21 L173.60,210.96 L150.50,210.96Z M173.00,178.21 L196.10,210.96 L173.00,210.96Z" fill="#ddd3bd"/>
+<text x="38.00" y="74.71" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="32.14" font-weight="bold" fill="#1c1a17" textLength="180.00" lengthAdjust="spacingAndGlyphs"> o  o  o</text>
+<text x="38.00" y="106.86" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="32.14" font-weight="bold" fill="#1c1a17" textLength="180.00" lengthAdjust="spacingAndGlyphs"> |\/ \/|</text>
+<text x="38.00" y="139.00" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="32.14" font-weight="bold" fill="#1c1a17" textLength="180.00" lengthAdjust="spacingAndGlyphs">  \   / </text>
+<text x="38.00" y="171.14" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="32.14" font-weight="bold" fill="#1c1a17" textLength="180.00" lengthAdjust="spacingAndGlyphs">   | |  </text>
+<text x="38.00" y="203.29" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="32.14" font-weight="bold" fill="#1c1a17" textLength="180.00" lengthAdjust="spacingAndGlyphs">  /___\ </text>
+</svg>

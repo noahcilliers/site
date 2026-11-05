@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>black king</title>
+<defs>
+  <filter id="edge" x="-10%" y="-10%" width="120%" height="120%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="grown"/>
+    <feFlood flood-color="#0c0b0a"/>
+    <feComposite in2="grown" operator="in" result="outline"/>
+    <feMerge><feMergeNode in="outline"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<g>
+<rect x="110.86" y="8.00" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="128.00" y="8.00" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="25.14" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="93.71" y="25.14" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="110.86" y="25.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="38.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="25.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="38.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="25.14" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="162.29" y="25.14" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="42.29" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="93.71" y="42.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="55.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="42.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="55.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="42.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="55.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="42.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="55.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="42.29" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="59.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="93.71" y="59.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="110.86" y="59.43" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="72.80" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="59.43" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="72.80" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="59.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="162.29" y="59.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="110.86" y="76.57" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="128.00" y="76.57" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="59.43" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="93.71" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="110.86" y="93.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="107.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="93.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="107.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="162.29" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="179.43" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="196.57" y="93.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="25.14" y="110.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="50.86" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="59.43" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="68.00" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="76.57" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="85.14" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="93.71" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="170.86" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="179.43" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="188.00" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="196.57" y="110.86" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="205.14" y="124.23" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="213.71" y="110.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="25.14" y="128.00" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="50.86" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="59.43" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="68.00" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="76.57" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="85.14" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="93.71" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="170.86" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="179.43" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="188.00" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="196.57" y="128.00" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="205.14" y="141.37" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="213.71" y="128.00" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="145.14" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="59.43" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="68.00" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="76.57" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="85.14" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="93.71" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="170.86" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="179.43" y="145.14" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="188.00" y="158.51" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="196.57" y="145.14" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="59.43" y="162.29" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="162.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="85.14" y="175.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="93.71" y="162.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="175.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="162.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="175.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="162.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="175.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="162.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="175.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="162.29" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="170.86" y="175.66" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="179.43" y="162.29" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="59.43" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="93.71" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="110.86" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="128.00" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="145.14" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="162.29" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="179.43" y="179.43" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="196.57" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="59.43" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="68.00" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="76.57" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="85.14" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="93.71" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="170.86" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="179.43" y="196.57" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="188.00" y="209.94" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="196.57" y="196.57" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="25.14" y="213.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="50.86" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="59.43" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="68.00" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="76.57" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="85.14" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="93.71" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="102.29" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="110.86" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="119.43" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="128.00" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="136.57" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="145.14" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="153.71" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="162.29" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="170.86" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="179.43" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="188.00" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="196.57" y="213.71" width="17.74" height="17.74" fill="#2b2926"/>
+<text x="205.14" y="227.09" text-anchor="middle" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="16.29" font-weight="bold" fill="#45423d">#</text>
+<rect x="213.71" y="213.71" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="25.14" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="42.29" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="59.43" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="76.57" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="93.71" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="110.86" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="128.00" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="145.14" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="162.29" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="179.43" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="196.57" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+<rect x="213.71" y="230.86" width="17.74" height="17.74" fill="#0c0b0a"/>
+</g>
+</svg>

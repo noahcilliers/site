@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name</title>
+  <meta name="description" content="Personal site of Your Name. Play a game of chess against whoever holds the other seat's API token.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@87.5,400;87.5,600;100,400&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <a class="nav-name" href="#top">Your Name</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero: a live game. You play on the board; your opponent plays over the HTTP API. -->
+    <section class="hero" id="top" aria-label="Play chess">
+      <div class="hero-text">
+        <h1 class="name">Your Name</h1>
+        <p class="role">Engineer who builds things that talk to other things. This board is one of them.</p>
+
+        <div class="game" aria-live="polite">
+          <p id="status" class="status">Move any white piece to start a game.</p>
+          <p id="substatus" class="substatus">Your opponent plays black through the API.</p>
+
+          <div class="controls">
+            <button id="play-black" class="btn">Play black instead</button>
+            <button id="restart" class="btn hidden">New game</button>
+            <button id="resign" class="btn quiet hidden">Resign</button>
+            <label class="set-picker">
+              <span>Pieces</span>
+              <select id="piece-set"></select>
+            </label>
+          </div>
+
+          <ol id="moves" class="scoresheet hidden" aria-label="Moves"></ol>
+
+          <details id="connect" class="connect hidden">
+            <summary>Play the <span id="opp-color">black</span> pieces over the API</summary>
+            <dl class="kv">
+              <dt>Game</dt><dd><code id="game-id"></code></dd>
+              <dt>Seat token</dt><dd><code id="opp-token"></code></dd>
+            </dl>
+            <div class="snippet">
+              <pre><code id="curl"></code></pre>
+              <button class="btn small" data-copy="curl">Copy</button>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="hero-board">
+        <div class="board-frame">
+          <div id="board" class="board" aria-label="Chess board"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <div class="prose">
+        <p>A few sentences about who you are and what you work on. Keep it to what a stranger needs in the first ten seconds: what you do, what you care about, and where you are.</p>
+        <p>A second paragraph can cover how you got here, or what you're looking for next. Two short paragraphs read better than one long one.</p>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-h">
+      <h2 id="work-h">Work</h2>
+      <ul class="work">
+        <li>
+          <a class="work-title" href="#top">Chess over HTTP</a>
+          <p>A chess engine with full rules, an HTTP API with seat tokens, and the board at the top of this page.</p>
+          <span class="work-meta">2026</span>
+        </li>
+        <li>
+          <a class="work-title" href="#">Project two</a>
+          <p>One sentence on what it does and why it was worth building.</p>
+          <span class="work-meta">2026</span>
+        </li>
+        <li>
+          <a class="work-title" href="#">Project three</a>
+          <p>One sentence on what it does and why it was worth building.</p>
+          <span class="work-meta">2025</span>
+        </li>
+        <li>
+          <a class="work-title" href="#">Project four</a>
+          <p>One sentence on what it does and why it was worth building.</p>
+          <span class="work-meta">2025</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" id="how" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <div class="how">
+        <p class="prose-lead">The board above has no special access. It holds one seat's token and makes moves through the same public API your opponent uses.</p>
+        <ol class="flow" aria-label="Path of a move">
+          <li><strong>Board</strong><span>You drag a piece. The page sends <code>POST /moves</code> with your seat token.</span></li>
+          <li><strong>API</strong><span>The HTTP layer checks the token and passes the move on.</span></li>
+          <li><strong>Game</strong><span>The rules engine checks it against every legal move and updates the position.</span></li>
+          <li><strong>Opponent</strong><span>Anyone waiting on the game gets the new position and replies the same way.</span></li>
+        </ol>
+        <dl class="endpoints">
+          <div><dt><code>POST /api/games</code></dt><dd>Start a game and get a token for each seat</dd></div>
+          <div><dt><code>GET /api/games/:id</code></dt><dd>Board, legal moves and history. Add <code>?since=</code> to wait for the next move</dd></div>
+          <div><dt><code>POST /api/games/:id/moves</code></dt><dd>Play a move like <code>e7e5</code></dd></div>
+          <div><dt><code>POST /api/games/:id/resign</code></dt><dd>Resign your seat</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <div>
+        <a class="email" href="mailto:you@example.com">you@example.com</a>
+        <ul class="links">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Résumé</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Your Name</p>
+  </footer>
+
+  <dialog id="promo" class="promo">
+    <p>Promote to</p>
+    <div id="promo-choices" class="promo-choices"></div>
+  </dialog>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>black pawn</title>
+<defs>
+  <filter id="edge" x="-10%" y="-10%" width="120%" height="120%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="grown"/>
+    <feFlood flood-color="#0c0b0a"/>
+    <feComposite in2="grown" operator="in" result="outline"/>
+    <feMerge><feMergeNode in="outline"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<circle cx="128" cy="128" r="122" fill="#0c0b0a"/>
+<circle cx="128" cy="128" r="115" fill="#2b2926"/>
+<circle cx="128" cy="128" r="103" fill="none" stroke="#f1ebdd" stroke-width="3" opacity="0.5"/>
+<path d="M116.10,79.00 L140.50,79.00 L140.50,113.60 L116.10,113.60Z M139.90,79.00 L164.30,79.00 L164.30,113.60 L139.90,113.60Z M116.10,113.00 L140.50,113.00 L140.50,147.60 L116.10,147.60Z M139.90,113.00 L164.30,113.00 L164.30,147.60 L139.90,147.60Z M116.70,147.00 L116.70,181.60 L92.30,181.60Z M116.10,147.00 L140.50,147.00 L140.50,181.60 L116.10,181.60Z M139.90,147.00 L164.30,147.00 L164.30,181.60 L139.90,181.60Z M163.70,147.00 L188.10,181.60 L163.70,181.60Z M92.90,181.00 L92.90,215.60 L68.50,215.60Z M92.30,181.00 L116.70,181.00 L116.70,215.60 L92.30,215.60Z M116.10,181.00 L140.50,181.00 L140.50,215.60 L116.10,215.60Z M139.90,181.00 L164.30,181.00 L164.30,215.60 L139.90,215.60Z M163.70,181.00 L188.10,181.00 L188.10,215.60 L163.70,215.60Z M187.50,181.00 L211.90,215.60 L187.50,215.60Z" fill="#45423d"/>
+<text x="44.70" y="105.52" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="34.00" font-weight="bold" fill="#f1ebdd" textLength="166.60" lengthAdjust="spacingAndGlyphs">   ()  </text>
+<text x="44.70" y="139.52" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="34.00" font-weight="bold" fill="#f1ebdd" textLength="166.60" lengthAdjust="spacingAndGlyphs">   )(  </text>
+<text x="44.70" y="173.52" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="34.00" font-weight="bold" fill="#f1ebdd" textLength="166.60" lengthAdjust="spacingAndGlyphs">  /  \ </text>
+<text x="44.70" y="207.52" xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="34.00" font-weight="bold" fill="#f1ebdd" textLength="166.60" lengthAdjust="spacingAndGlyphs"> /____\</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>black queen</title>
+  <text xml:space="preserve" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace"
+        font-size="21.33" font-weight="bold" fill="#111111"
+        stroke="#f5f5f5" stroke-width="2.56" paint-order="stroke"
+        textLength="192.00" lengthAdjust="spacingAndGlyphs">
+    <tspan x="32.00" y="20.27">               </tspan>
+    <tspan x="32.00" y="45.87">               </tspan>
+    <tspan x="32.00" y="71.47">    o   o   o  </tspan>
+    <tspan x="32.00" y="97.07">    |\ /#\ /|  </tspan>
+    <tspan x="32.00" y="122.67">    |#V###V#|  </tspan>
+    <tspan x="32.00" y="148.27">     \_____/   </tspan>
+    <tspan x="32.00" y="173.87">      |###|    </tspan>
+    <tspan x="32.00" y="199.47">      |###|    </tspan>
+    <tspan x="32.00" y="225.07">     /_____\   </tspan>
+    <tspan x="32.00" y="250.67">    [_______]  </tspan>
+  </text>
+</svg>
