@@ -13,7 +13,8 @@ bot/checkpoints/
 *.npy
 *.npz
 *.parquet
-
+bot/chessbot.egg-info
+bot/chessbot/__pycache__
 # Python
 __pycache__/
 *.py[cod]

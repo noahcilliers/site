@@ -25,24 +25,26 @@ output layer: whatever size X 1,858
 """
 
 
-##import torch
+import torch
 import torch.nn as nn
 from chessbot.tokens import PIECE_IDS, MOVES, MOVE_TO_INDEX
 
 
 class ChessModel(nn.Module):
-    def _init_(self, dim):
+    def __init__(self, dim=512):
         super().__init__()
         # so how many different tokens do we have in our input
         # so we want to encode our pieces along with their position
         # so we can have piece embeds and square embs
         self.piece_embedding = nn.Embedding(len(PIECE_IDS), dim)
+        ## 13 x 512
         self.pos_embedding = nn.Embedding(64, dim)
-
-        self.encode = nn.TransformerEncodeLayer(dim, nhead=4, bath_first=True)
-        self.decode = nn.TransformerDecodeLayer(dim, nhead=16, batch_first=True)
-    
+        ## 64 x 512
+        self.encoder_layer = nn.TransformerEncoderLayer(dim, nhead=4, batch_first=True)
+        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=6)
+        ## 6 x 4(512^2) + 2x512^2 + 6x512
         self.out = nn.Linear(dim, len(MOVES))
+        # 2000 params
     
     
     
@@ -50,9 +52,8 @@ class ChessModel(nn.Module):
         
         squares = torch.arange(64, device=board.device)
         x = self.piece_embedding(board)  + self.pos_embedding(squares)
-        x = self.encode(x)
-        x = self.decode(x)
-        
+        x = self.encoder(x)
+   
         return self.out(x)
 
 
