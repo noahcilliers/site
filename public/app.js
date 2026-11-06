@@ -40,7 +40,7 @@ const api = {
     if (!res.ok) throw new Error(data.error ?? `Request failed (${res.status})`);
     return data;
   },
-  createGame: () => api.request('POST', '/api/games'),
+  createGame: (color) => api.request('POST', '/api/games', { opponent: 'bot', color }),
   getGame: (id, since) => api.request('GET', `/api/games/${id}${since === undefined ? '' : `?since=${since}`}`),
   move: (id, move) => api.request('POST', `/api/games/${id}/moves`, { move }),
   resign: (id) => api.request('POST', `/api/games/${id}/resign`),
@@ -197,7 +197,7 @@ function renderStatus() {
 
   if (!g) {
     el.textContent = 'Move any white piece to start a game.';
-    sub.textContent = 'Your opponent plays black through the API.';
+    sub.textContent = 'You play against the bot.';
     return;
   }
   const endings = {
@@ -219,8 +219,8 @@ function renderStatus() {
     if (g.inCheck) el.classList.add('alert');
     sub.textContent = `You're playing ${state.myColor}.`;
   } else {
-    el.textContent = g.inCheck ? `Check. Waiting for ${opp}.` : `Waiting for ${opp}.`;
-    sub.textContent = `The ${opp} seat moves through the API. Open the panel below to play it yourself.`;
+    el.textContent = g.inCheck ? 'Check. The bot is thinking.' : 'The bot is thinking.';
+    sub.textContent = `The bot plays ${opp}.`;
   }
 }
 
@@ -387,13 +387,13 @@ async function startGame(color) {
   state.myColor = color;
   let created;
   try {
-    created = await api.createGame();
+    created = await api.createGame(color);
   } finally {
     state.starting = false;
   }
   state.gameId = created.game.id;
   state.token = created.seats[color];
-  state.oppToken = created.seats[color === 'white' ? 'black' : 'white'];
+  state.oppToken = created.seats[color === 'white' ? 'black' : 'white'] ?? null; // null: the bot holds it
   state.game = created.game;
   state.selected = null;
   saveSession();
@@ -411,7 +411,8 @@ function showGameUi() {
 /** Toggles between the pre-game controls and the in-game ones. */
 function setGameControls(inGame) {
   $('play-black').classList.toggle('hidden', inGame);
-  for (const id of ['restart', 'resign', 'moves', 'connect']) $(id).classList.toggle('hidden', !inGame);
+  for (const id of ['restart', 'resign', 'moves']) $(id).classList.toggle('hidden', !inGame);
+  $('connect').classList.toggle('hidden', !inGame || !state.oppToken); // API seat panel only when we hold that token
 }
 
 async function poll() {

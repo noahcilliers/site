@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your Name</title>
-  <meta name="description" content="Personal site of Your Name. Play a game of chess against whoever holds the other seat's API token.">
+  <meta name="description" content="Personal site of Your Name. Play a game of chess against a neural-network bot.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@87.5,400;87.5,600;100,400&display=swap">
@@ -24,7 +24,7 @@
   </header>
 
   <main id="main">
-    <!-- Hero: a live game. You play on the board; your opponent plays over the HTTP API. -->
+    <!-- Hero: a live game. You play on the board; the server's bot plays the other side. -->
     <section class="hero" id="top" aria-label="Play chess">
       <div class="hero-text">
         <h1 class="name">Your Name</h1>
@@ -32,7 +32,7 @@
 
         <div class="game" aria-live="polite">
           <p id="status" class="status">Move any white piece to start a game.</p>
-          <p id="substatus" class="substatus">Your opponent plays black through the API.</p>
+          <p id="substatus" class="substatus">You play against the bot.</p>
 
           <div class="controls">
             <button id="play-black" class="btn">Play black instead</button>
@@ -109,7 +109,7 @@
           <li><strong>Board</strong><span>You drag a piece. The page sends <code>POST /moves</code> with your seat token.</span></li>
           <li><strong>API</strong><span>The HTTP layer checks the token and passes the move on.</span></li>
           <li><strong>Game</strong><span>The rules engine checks it against every legal move and updates the position.</span></li>
-          <li><strong>Opponent</strong><span>Anyone waiting on the game gets the new position and replies the same way.</span></li>
+          <li><strong>Bot</strong><span>The server sends the new position to a neural-network bot, which replies through the same API.</span></li>
         </ol>
         <dl class="endpoints">
           <div><dt><code>POST /api/games</code></dt><dd>Start a game and get a token for each seat</dd></div>

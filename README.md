@@ -23,6 +23,24 @@ Try it with the example bot:
 node examples/random-bot.js http://localhost:3000 <game-id> <seat-token>
 ```
 
+## Playing the bot
+
+The web page always plays against the neural-network bot in `bot/`. The JS server plays the
+bot's seat itself: on the bot's turn it sends the position to the Python server and plays the
+move it gets back.
+
+```bash
+python bot/chessbot/server.py   # Python bot on http://127.0.0.1:8000 (POST /move {"fen": ...})
+npm start                       # web + API on http://localhost:3000
+```
+
+Set `BOT_URL` to point the JS server at a different bot address. If the bot server is down,
+the bot keeps retrying (up to every 30s) and moves as soon as it's back.
+
+To start a bot game over the API, send `{"opponent": "bot", "color": "white"}` to
+`POST /api/games`. Only your seat's token comes back; the bot's stays on the server.
+Without `opponent`, games work as before: two seats, both tokens returned.
+
 ## Architecture
 
 ```
@@ -36,9 +54,11 @@ src/
     errors.js        Domain errors (illegal move, not your turn, ...)
   application/
     gameService.js   Use cases: create, get, move, resign, wait for change. Seat tokens.
+    botPlayer.js     Plays one seat automatically, asking a move engine for each move
   infrastructure/
     inMemoryGameRepository.js   Storage adapter (swap for a database later)
     randomIds.js                ID/token generation
+    httpMoveEngine.js           Move engine that calls the Python bot's POST /move
   interfaces/http/
     server.js        HTTP adapter: routes → GameService, errors → status codes, static files
     router.js
@@ -63,7 +83,7 @@ Moves for a seat need its token, sent as `Authorization: Bearer <token>`
 
 | Method | Path | What it does |
 |---|---|---|
-| `POST` | `/api/games` | New game. Returns `{ game, seats: { white, black } }` |
+| `POST` | `/api/games` | New game. Returns `{ game, seats: { white, black } }`. With `{"opponent":"bot","color":"white"}`, the bot plays the other colour and only your seat is returned |
 | `GET` | `/api/games` | List games |
 | `GET` | `/api/games/:id` | Game state (board, FEN, turn, status, legal moves, history) |
 | `GET` | `/api/games/:id?since=<version>` | Long-poll: waits until the game changes (up to `timeout` seconds, default 25) |

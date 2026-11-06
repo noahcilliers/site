@@ -42,11 +42,28 @@ function statusFor(err) {
 /**
  * HTTP adapter: translates requests into GameService calls and results into JSON.
  * Also serves the web UI (publicDir) and piece images (piecesDir).
+ * With a botPlayer, POST /api/games {"opponent":"bot","color":"white"} starts a game
+ * where the bot plays the other colour.
  */
-export function createHttpServer({ gameService, publicDir, piecesDir }) {
+export function createHttpServer({ gameService, publicDir, piecesDir, botPlayer = null }) {
   const api = new Router()
     .get('/api/games', () => gameService.listGames())
-    .post('/api/games', async () => ({ status: 201, body: await gameService.createGame() }))
+    .post('/api/games', async ({ body }) => {
+      if (body.opponent === undefined) return { status: 201, body: await gameService.createGame() };
+      if (body.opponent !== 'bot') throw new HttpError(400, '"opponent" must be "bot" or left out');
+      if (!botPlayer) throw new HttpError(503, 'No bot is configured on this server');
+      if (body.color !== 'white' && body.color !== 'black') {
+        throw new HttpError(400, 'Playing the bot needs "color": "white" or "black"');
+      }
+      const created = await gameService.createGame();
+      const botColor = body.color === 'white' ? 'black' : 'white';
+      botPlayer.play(created.game.id, created.seats[botColor], botColor);
+      // Only the human's seat token goes back; the bot's stays on the server.
+      return {
+        status: 201,
+        body: { game: created.game, seats: { [body.color]: created.seats[body.color] }, opponent: 'bot' },
+      };
+    })
     .get('/api/games/:id', ({ params, query }) => {
       if (query.has('since')) {
         const timeout = Math.min(Number(query.get('timeout') ?? 25), 60) * 1000;
