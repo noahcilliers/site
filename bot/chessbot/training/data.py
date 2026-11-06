@@ -1,205 +1,100 @@
 """
-these helpers extract and format data for me train and test
+This file will define my datasets and dataloaders
+
+this is absolutely necassary for training my model because it is how we are going to 
+abstract the processing and make training so so so much easier
+
+so for our shape its really just
+
+input: batch x 64 
+
+labels: string
+
+training
+
+get our final probs
+-> take the CELoss of the label class
+-> label can just be that string indicator
+-> we'll just consult the dict, and then do CELoss on that splish
+
+the purpose of our dataset is to store the data in our memory
+the purpose of the dataloader is to grab that data and return it in batches
+so when we grab the frame, we will convert it to labels and fewns
 
 """
-from pathlib import Path
-import zstandard as zstd
-import chess
-import chess.pgn
-import io
-import argparse
-import csv
-import gzip
+import os
+import pandas as pd
+import torch
+from torch.utils.data import Dataset
+from tokens import board_tokens, PIECE_IDS, MOVE_TO_INDEX, MOVES
+
+class ChessGameDataset(Dataset):
+    def __init__(self, df):
+        self.df = df
+    
+    def flip_move(self, move):
+        """Mirror a UCI move top-to-bottom: b8c6 -> b1c3, e2e1q -> e7e8q."""
+        return move[0] + str(9 - int(move[1])) + move[2] + str(9 - int(move[3])) + move[4:]
+    
+    def __len__(self):
+        return len(self.df)
+
+    def __getitem__(self, idx):
+        row = self.df.iloc[idx]
+        fen, move = row["fen"], row["move"]
+        board = torch.tensor(board_tokens(fen), dtype=torch.long)
+        if fen.split()[1] == "b":      # Black to move → board was flipped, so flip the move too
+            move = self.flip_move(move)
+        if move.endswith("q"):         # queen promotion is stored as the plain move in MOVES
+            move = move[:-1]
+        label = MOVE_TO_INDEX[move]
+        return board, label
+
+
+def games_in_batches(path, games_per_batch, chunk_rows=500_000):
+    """Yield DataFrames holding games_per_batch whole games each."""
+    buffer = pd.DataFrame()
+    for chunk in pd.read_csv(path, chunksize=chunk_rows):
+        buffer = pd.concat([buffer, chunk], ignore_index=True)
+        game_num = (buffer["ply"] == 0).cumsum()          # 1,1,1,...,2,2,... one number per game
+        while game_num.iloc[-1] > games_per_batch:         # buffer holds a full batch + start of the next game
+            in_batch = game_num <= games_per_batch
+            yield buffer[in_batch]
+            buffer = buffer[~in_batch].reset_index(drop=True)
+            game_num = game_num[~in_batch].reset_index(drop=True) - games_per_batch
+    if len(buffer):
+        yield buffer                                       # last, smaller batch
+
+
+ID_TO_PIECE = {i: p for p, i in PIECE_IDS.items()}   # 0 → ".", 1 → "P", ...
+
+def print_board(tokens):
+    """Print 64 board tokens (list or tensor) as an 8x8 grid."""
+    for r in range(8):
+        row = tokens[r * 8:(r + 1) * 8]
+        print(8 - r, " ".join(ID_TO_PIECE[int(t)] for t in row))
+    print("  a b c d e f g h")
+
+
+
+
+
+
 
 
 """
-so first we have to actually get the proper data and save it to a file
-so
+this is like the loop we'll use for training
 
-"""
-script_dir = Path(__file__).parent
+so lets not worry too much about it right now
 
-
-file_path = script_dir / ".." / ".." / ".."/ "data"/ "partial.pgn.zst"
-
-file_path = file_path.resolve()
+lets go ahead and get out loader set up for this and then we'll be looking good 
+to write a trianing alg
 
 
-def explore_low_elo_games():
-    """First look at the data: print the 500-600 Elo games and their moves."""
-    print(f"Reading from: {file_path}")
-
-    counter = 0
-    with open(file_path, 'rb') as fh:
-        # Create a streaming decompressor
-        dctx = zstd.ZstdDecompressor()
-        with dctx.stream_reader(fh) as reader:
-            # Wrap the byte stream into a text stream
-            text_stream = io.TextIOWrapper(reader, encoding='utf-8')
-
-            # Read games one by one efficiently without filling memory]
-            while True:
-                game = chess.pgn.read_game(text_stream)
-                if game is None:
-                    break  # End of file
-
-                # Access the headers/tags directly
-                white_player = game.headers.get("White")
-                white_elo = game.headers.get("WhiteElo")
-                white_elo = int(white_elo)
-                result = game.headers.get("Result")
-
-                termination = game.headers.get("Termination")
-                if white_elo > 500 and white_elo < 600:
-                    print(f"{white_player} ({white_elo}) managed a result of {result} through {termination}")
-
-                    # If you want the actual moves as a list:
-                    moves = [move.uci() for move in game.mainline_moves()]
-                    print(moves)
-                    counter += 1
-
-    print(counter)
-
-"""
-ok so we have the data here but we can tell it is not in FEN format
-
-so we're going to have to extract our games into fen format
-
-this means we have to keep track of every little movement of the game
-
+for games_df in games_in_batches("~/my-site/data/positions/positions.csv", games_per_batch=10):
+    dataset = ChessGameDataset(games_df)        
+    board, label = dataset[1]
+    print_board(board)
+    print(label, MOVES[label])
 """
 
-"""
-Pre-processing: turn the PGN games into training positions.
-
-We replay every game move by move and record the FEN *before* each move, along
-with the move that was actually played there (that move is the training label).
-
-One game of N moves becomes N rows:
-
-    game      ply  fen                                                       move  white_elo  black_elo  result
-    Q8ku5wgM  0    rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1  d2d4  1825       1790       1/2-1/2
-    Q8ku5wgM  1    rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1  g8f6  1825       1790       1/2-1/2
-    ...
-
-Rows are written straight to a CSV file as we go, so the whole dataset never
-has to fit in memory. tokens.py turns each FEN into model input at training time.
-
-Usage (from the repo root):
-    python bot/chessbot/training/data.py --max-games 1000
-    python bot/chessbot/training/data.py --min-elo 1500 --max-elo 2000 --output data/positions_1500.csv.gz
-"""
-
-DEFAULT_OUTPUT = file_path.parent / "positions.csv"
-
-COLUMNS = ["game", "ply", "fen", "move", "white_elo", "black_elo", "result"]
-
-
-def read_games(path: Path):
-    """Yield games one at a time from a .pgn.zst (or plain .pgn) file."""
-    with open(path, "rb") as fh:
-        if path.suffix == ".zst":
-            stream = io.TextIOWrapper(zstd.ZstdDecompressor().stream_reader(fh), encoding="utf-8")
-        else:
-            stream = io.TextIOWrapper(fh, encoding="utf-8")
-        while True:
-            game = chess.pgn.read_game(stream)
-            if game is None:
-                return
-            yield game
-
-
-def game_to_positions(game: chess.pgn.Game) -> list[tuple[str, str]]:
-    """Replay a game and return (fen_before_move, move_uci) for every move."""
-    board = game.board()  # starting position (normally the standard one)
-    positions = []
-    for move in game.mainline_moves():
-        positions.append((board.fen(), move.uci()))
-        board.push(move)
-    return positions
-
-
-def parse_elo(value: str | None) -> int | None:
-    """Lichess writes '?' when a rating is missing."""
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return None
-
-
-def keep_game(game: chess.pgn.Game, min_elo: int, max_elo: int) -> bool:
-    """Only standard chess, both ratings known and inside [min_elo, max_elo]."""
-    headers = game.headers
-    if headers.get("Variant", "Standard") != "Standard":
-        return False
-    if game.errors:  # python-chess hit an illegal or unreadable move
-        return False
-    white_elo = parse_elo(headers.get("WhiteElo"))
-    black_elo = parse_elo(headers.get("BlackElo"))
-    if white_elo is None or black_elo is None:
-        return False
-    return min_elo <= white_elo <= max_elo and min_elo <= black_elo <= max_elo
-
-
-def game_id(game: chess.pgn.Game, fallback: int) -> str:
-    """The Lichess id from the Site header (…/game/Q8ku5wgM), or a running number."""
-    site = game.headers.get("Site", "")
-    return site.rsplit("/", 1)[-1] if "/" in site else str(fallback)
-
-
-def build_dataset(input_path: Path, output_path: Path, max_games: int | None = None,
-                  min_elo: int = 0, max_elo: int = 10_000) -> None:
-    """Stream games from input_path and write one CSV row per position to output_path.
-
-    A path ending in .gz is gzip-compressed (a lot smaller than plain CSV).
-    """
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    opener = gzip.open if output_path.suffix == ".gz" else open
-
-    games_seen = games_kept = positions_written = 0
-    with opener(output_path, "wt", newline="") as out:
-        writer = csv.writer(out)
-        writer.writerow(COLUMNS)
-
-        for game in read_games(input_path):
-            games_seen += 1
-            if not keep_game(game, min_elo, max_elo):
-                continue
-
-            positions = game_to_positions(game)
-            if not positions:
-                continue
-
-            gid = game_id(game, games_seen)
-            white_elo = game.headers["WhiteElo"]
-            black_elo = game.headers["BlackElo"]
-            result = game.headers.get("Result", "*")
-            for ply, (fen, move) in enumerate(positions):
-                writer.writerow([gid, ply, fen, move, white_elo, black_elo, result])
-
-            games_kept += 1
-            positions_written += len(positions)
-            if games_kept % 10_000 == 0:
-                print(f"{games_kept:,} games kept / {games_seen:,} read, {positions_written:,} positions")
-            if max_games is not None and games_kept >= max_games:
-                break
-
-    print(f"Done: {games_kept:,} games kept / {games_seen:,} read, "
-          f"{positions_written:,} positions -> {output_path}")
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Turn PGN games into (FEN, move) training positions.")
-    parser.add_argument("--input", type=Path, default=file_path, help="PGN file (.pgn or .pgn.zst)")
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="CSV file (.csv or .csv.gz)")
-    parser.add_argument("--max-games", type=int, default=None, help="stop after this many kept games")
-    parser.add_argument("--min-elo", type=int, default=0, help="both players must be at least this")
-    parser.add_argument("--max-elo", type=int, default=10_000, help="both players must be at most this")
-    args = parser.parse_args()
-
-    print(f"Reading from: {args.input}")
-    build_dataset(args.input, args.output, args.max_games, args.min_elo, args.max_elo)
-
-
-if __name__ == "__main__":
-    main()

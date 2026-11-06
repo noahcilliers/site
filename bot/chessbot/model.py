@@ -27,7 +27,7 @@ output layer: whatever size X 1,858
 
 import torch
 import torch.nn as nn
-from chessbot.tokens import PIECE_IDS, MOVES, MOVE_TO_INDEX
+from chessbot.training.tokens import PIECE_IDS, MOVES, MOVE_TO_INDEX
 
 
 class ChessModel(nn.Module):

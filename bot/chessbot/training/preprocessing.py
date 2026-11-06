@@ -90,7 +90,7 @@ Usage (from the repo root):
     python bot/chessbot/training/data.py --min-elo 1500 --max-elo 2000 --output data/positions_1500.csv.gz
 """
 
-DEFAULT_OUTPUT = file_path.parent / "positions.csv"
+DEFAULT_OUTPUT = file_path.parent / "positions" / "positions.csv"
 
 COLUMNS = ["game", "ply", "fen", "move", "white_elo", "black_elo", "result"]
 
