@@ -1,0 +1,37 @@
+# Training data and model weights (large; keep out of git)
+data/
+models/
+bot/models/
+bot/checkpoints/
+*.pgn
+*.pgn.zst
+*.zst
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+redteam-env/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+
+# Secrets and local config
+.env
+.env.*
+
+# OS and editors
+.DS_Store
+.vscode/
+.idea/
