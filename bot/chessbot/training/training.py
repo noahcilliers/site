@@ -36,7 +36,7 @@ def train():
 
 
 def run_training(model, optimizer, nums_epochs=10):
-    df = pd.read_csv("~/my-site/data/positions/positions.csv")
+    df = pd.read_csv("~/my-site/data/positions/positions_1200_1800.csv")
 
     # split by game, not by row, so no game is in both sets
     games = pd.Series(df["game"].unique())
@@ -95,7 +95,7 @@ def run_training(model, optimizer, nums_epochs=10):
         #save model
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
-            torch.save(model.state_dict(), MODEL_DIR / "chessbot_best.pt")
+            torch.save(model.state_dict(), MODEL_DIR / "chessbot_small_.pt")
 
 if __name__ == "__main__":
     train()    

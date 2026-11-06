@@ -31,7 +31,7 @@ from chessbot.training.tokens import PIECE_IDS, MOVES, MOVE_TO_INDEX
 
 
 class ChessModel(nn.Module):
-    def __init__(self, dim=512):
+    def __init__(self, dim=256):
         super().__init__()
         # so how many different tokens do we have in our input
         # so we want to encode our pieces along with their position
@@ -40,7 +40,7 @@ class ChessModel(nn.Module):
         ## 13 x 512
         self.pos_embedding = nn.Embedding(64, dim)
         ## 64 x 512
-        encoder_layer = nn.TransformerEncoderLayer(dim, nhead=4, batch_first=True, norm_first=True)
+        encoder_layer = nn.TransformerEncoderLayer(dim, nhead=4, dim_feedforward=1024, batch_first=True, norm_first=True)
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=6)
         ## 6 x 4(512^2) + 2x512^2 + 6x512
         self.norm = nn.LayerNorm(dim)
@@ -59,3 +59,4 @@ class ChessModel(nn.Module):
 
 
 print(PIECE_IDS)
+print(sum(p.numel() for p in ChessModel().parameters()))
