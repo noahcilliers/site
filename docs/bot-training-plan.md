@@ -35,8 +35,21 @@ on the site through the existing API and only ever chooses from the API's legal-
 
 - The Lichess open database (`database.lichess.org`), one compressed PGN file per month.
 - Keep games where **both players are within ±200 of my rating**, in **my time control**.
-- 2–5 million games is plenty to start (about 80–200 million positions). Sample from several
-  months.
+- **Target: about 500,000 filtered games** (about 20 million positions). That's enough to
+  pretrain the ~11M model below. Scale up later only if it is clearly still improving.
+- **Download only part of one month (about 1–3 GB). Never the whole file.**
+  - Monthly files are big (tens of GB), but they are a single compressed stream, so you can
+    read from the start and stop whenever you like:
+    ```bash
+    curl -s https://database.lichess.org/standard/<month-file>.pgn.zst \
+      | zstd -dc | python3 filter_games.py --rating 1400-1800 --time blitz --max-games 500000
+    ```
+  - The filter script stops reading once it has enough games, and curl stops downloading with it.
+  - Typically 5–15% of games pass the rating and time-control filter, so 500,000 kept games means
+    reading about 3–10 million. That's roughly 1–3 GB of download.
+  - Nothing big is saved. Only the kept games are written, at about 200–400 MB of PGN.
+- **Training data on disk:** each example is about 150–200 bytes, so 20M positions is about
+  3–4 GB. To save space, store only each game's move list and build the examples while training.
 
 ### Splits
 
@@ -95,8 +108,8 @@ puts a move-scoring head on the `[CLS]` output.
 | Option | Layers | Width | Heads | Params | When to use |
 |---|---|---|---|---|---|
 | Small | 4 | 256 | 4 | ~3M | Training on my games only, or a first quick run |
-| **Main** | 8 | 512 | 8 | ~25M | Pretrain on public games, then fine-tune on mine |
-| Large | 12 | 640 | 10 | ~60M | Only if Main is clearly still improving with more data |
+| **Main** | 6 | 384 | 6 | ~11M | Pretrain on ~500k public games, then fine-tune on mine |
+| Large | 8 | 512 | 8 | ~25M | Only with 2M+ public games and Main clearly still improving |
 
 - Learned position embeddings: each board square always sits at the same position in the input.
 - Dropout 0.1 for pretraining, 0.1–0.2 for fine-tuning.
@@ -108,11 +121,11 @@ puts a move-scoring head on the `[CLS]` output.
 - Loss: cross-entropy on the masked move distribution.
 - Optimiser: AdamW, learning rate 3e-4, cosine decay, ~2,000 warmup steps, weight decay 0.05.
 - Batch: ~1,024 positions.
-- About one pass over 80–200M positions.
+- 2–3 passes over the ~20M positions, stopping when validation accuracy flattens.
 
-**Rough compute** for the Main model on 100M positions: about 1.5×10¹⁸ operations. That's roughly
-a day on one rented data-centre GPU, and several days on an Apple Silicon Mac. To start, cut it
-to 10–20M positions; that runs in a few hours and is enough to check the pipeline.
+**Rough compute** for the Main model (~11M params) on 20M positions: about 1.3×10¹⁷ operations
+per pass. That's very roughly half a day per pass on an Apple Silicon Mac, or under an hour on a
+rented GPU. For a first pipeline check, use 1–2M positions; that runs in well under an hour.
 
 ### Stage B: fine-tuning on my games
 
@@ -145,18 +158,18 @@ on top of the pretrained model, mostly in openings and recurring structures.
   shows. Use temperature 0 (always the top move) for evaluation runs.
 - Each request is independent (the full position is in the request), so many games can run at
   once. Batch requests that arrive together.
-- Speed: a 25M model on CPU takes milliseconds per move. A GPU isn't needed for serving.
+- Speed: an 11M model on CPU takes milliseconds per move. A GPU isn't needed for serving.
 - Missing piece: the chess server needs a hook that calls the bot's URL when it is the bot's
   turn and plays the returned move. It doesn't exist yet.
 
 ## 9. Milestones
 
-1. **Data export:** download my games and a month of Lichess games, filtered by rating and time
+1. **Data export:** download my games and stream ~500k Lichess games (1–3 GB), filtered by rating and time
    control.
 2. **Example builder:** PGN to training arrays using the existing engine, with checks that every
    target move is in its legal list.
 3. **Small model on my games only:** sanity-check the full pipeline end to end.
-4. **Pretrain the Main model** on public games (start with 10–20M positions).
+4. **Pretrain the Main model** on ~500k filtered public games (about 20M positions).
 5. **Fine-tune on my games** and compare against baselines.
 6. **Bot server and site hook:** play it live on the site.
 7. **Iterate:** more data, sampling temperature, recency weighting.

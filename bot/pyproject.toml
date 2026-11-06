@@ -1,0 +1,16 @@
+[project]
+name = "chessbot"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "torch>=2.3",
+  "python-chess>=1.10",
+  "fastapi",          # for the POST /move server
+  "uvicorn",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+chessbot-serve = "chessbot.server:main"   # makes a `chessbot-serve` command
