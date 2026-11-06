@@ -90,3 +90,4 @@ def build_move_vocab() -> list[str]:
 
 MOVES = build_move_vocab()
 MOVE_TO_INDEX = {m: i for i, m in enumerate(MOVES)}
+#print(MOVES[0])
