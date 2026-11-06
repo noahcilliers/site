@@ -41,7 +41,7 @@ class ChessModel(nn.Module):
         self.pos_embedding = nn.Embedding(64, dim)
         ## 64 x 512
         encoder_layer = nn.TransformerEncoderLayer(dim, nhead=4, batch_first=True, norm_first=True)
-        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=6)
+        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=6)
         ## 6 x 4(512^2) + 2x512^2 + 6x512
         self.norm = nn.LayerNorm(dim)
         self.out = nn.Linear(dim, len(MOVES))
