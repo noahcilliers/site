@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: chessbot
+Version: 0.1.0
+Requires-Python: >=3.11
+Requires-Dist: torch>=2.3
+Requires-Dist: python-chess>=1.10
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"

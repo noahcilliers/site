@@ -1,0 +1,10 @@
+pyproject.toml
+chessbot/model.py
+chessbot/server.py
+chessbot/tokens.py
+chessbot.egg-info/PKG-INFO
+chessbot.egg-info/SOURCES.txt
+chessbot.egg-info/dependency_links.txt
+chessbot.egg-info/entry_points.txt
+chessbot.egg-info/requires.txt
+chessbot.egg-info/top_level.txt

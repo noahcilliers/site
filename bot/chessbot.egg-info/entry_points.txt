@@ -1,0 +1,2 @@
+[console_scripts]
+chessbot-serve = chessbot.server:main

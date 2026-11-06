@@ -1,0 +1,7 @@
+torch>=2.3
+python-chess>=1.10
+fastapi
+uvicorn
+
+[dev]
+pytest
