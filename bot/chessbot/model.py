@@ -40,11 +40,12 @@ class ChessModel(nn.Module):
         ## 13 x 512
         self.pos_embedding = nn.Embedding(64, dim)
         ## 64 x 512
-        self.encoder_layer = nn.TransformerEncoderLayer(dim, nhead=4, batch_first=True)
+        encoder_layer = nn.TransformerEncoderLayer(dim, nhead=4, batch_first=True, norm_first=True)
         self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=6)
         ## 6 x 4(512^2) + 2x512^2 + 6x512
+        self.norm = nn.LayerNorm(dim)
         self.out = nn.Linear(dim, len(MOVES))
-        # 2000 params
+        
     
     
     
@@ -53,8 +54,8 @@ class ChessModel(nn.Module):
         squares = torch.arange(64, device=board.device)
         x = self.piece_embedding(board)  + self.pos_embedding(squares)
         x = self.encoder(x)
-   
-        return self.out(x)
+        x = self.norm(x)
+        return self.out(x.mean(dim=1))
 
 
 print(PIECE_IDS)
