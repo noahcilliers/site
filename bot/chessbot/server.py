@@ -1,16 +1,20 @@
+from pathlib import Path
 import uvicorn
 from fastapi import FastAPI
-from model import ChessModel
+from chessbot.model import ChessModel
 import torch
-import torch.nn as nn
-from inference import pick_move
+from chessbot.inference import pick_move
+from pydantic import BaseModel
+import chess
+from fastapi import FastAPI, HTTPException
 
 MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "chessbot_best.pt"
+model = ChessModel()
 model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu", weights_only=True))
 model.eval()
 
 app = FastAPI()
-model = ChessModel()
+
 
 class MoveRequest(BaseModel):
     fen: str
@@ -33,5 +37,5 @@ def main():
 
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     main()
