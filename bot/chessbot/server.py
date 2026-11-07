@@ -8,7 +8,7 @@ from pydantic import BaseModel
 import chess
 from fastapi import FastAPI, HTTPException
 
-MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "chessbot_small_.pt"
+MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "chessbot_small_v2.pt"
 model = ChessModel()
 model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu", weights_only=True))
 model.eval()
