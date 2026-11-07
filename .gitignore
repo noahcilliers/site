@@ -1,7 +1,7 @@
 # Training data and model weights (large; keep out of git)
 data/
-models/
-bot/models/
+/models/
+bot/models/*
 bot/checkpoints/
 *.pgn
 *.pgn.zst
@@ -10,6 +10,9 @@ bot/checkpoints/
 *.pth
 *.ckpt
 *.safetensors
+# ...except the small model the deployed server loads (21 MB)
+!bot/models/chessbot_small_.pt
+!bot/models/chessbot_small_v2.pt
 *.npy
 *.npz
 *.parquet

@@ -1,0 +1,21 @@
+# Keep the image small: no training data, history or local tooling.
+.git
+.claude
+data/
+node_modules/
+tests/
+docs/
+examples/
+**/__pycache__
+*.egg-info
+*.pgn
+*.zst
+bot/checkpoints/
+bot/chessbot/training/positions/
+
+# Only the model the server loads should go in. The old 512-dim model doesn't fit ChessModel().
+bot/models/chessbot_best.pt
+
+.env
+.env.*
+.DS_Store

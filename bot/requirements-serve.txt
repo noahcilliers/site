@@ -1,0 +1,6 @@
+# What the bot server needs to run (no training libraries).
+# torch is installed separately in the Dockerfile from the CPU-only index.
+chess==1.11.2
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.3
