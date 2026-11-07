@@ -29,13 +29,16 @@ def train():
 
 
     """
-    model = ChessModel().to(DEVICE)
-    optimizer = optim.AdamW(model.parameters(), lr=3e-4, weight_decay=0.01)
+    
+    model = ChessModel()
+    model.load_state_dict(torch.load(MODEL_DIR / "chessbot_small_.pt", map_location="cpu", weights_only=True))
+    model = model.to(DEVICE)
+    optimizer = optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0.01)
 
     run_training(model, optimizer)
 
 
-def run_training(model, optimizer, nums_epochs=10):
+def run_training(model, optimizer, nums_epochs=3):
     df = pd.read_csv("~/my-site/data/positions/positions_1200_1800.csv")
 
     # split by game, not by row, so no game is in both sets
@@ -95,7 +98,7 @@ def run_training(model, optimizer, nums_epochs=10):
         #save model
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
-            torch.save(model.state_dict(), MODEL_DIR / "chessbot_small_.pt")
+            torch.save(model.state_dict(), MODEL_DIR / "chessbot_small_v2.pt")
 
 if __name__ == "__main__":
     train()    
